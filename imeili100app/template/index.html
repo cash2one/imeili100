@@ -9,7 +9,6 @@
     <meta name="author" content="">
 
     <title>爱美丽100分</title>
-
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
@@ -89,7 +88,7 @@
                                 </ol>
                                 <div class="carousel-inner">
                                     <div  v-for="(item ,index) in brands" :class="index==0?'item active':'item'">
-                                        <img class="slide-image" v-bind:src="'/img/'+item.img_name" alt="">
+                                        <img class="slide-image" v-bind:src="item.img_name" alt="">
                                     </div>
 
                                 </div>
@@ -107,12 +106,12 @@
                     <div class="row" id="brandDiv">
                         <div class="col-sm-4 col-lg-4 col-md-4" v-for="item in brands">
                             <div class="thumbnail">
-                                <img v-bind:src="'/img/'+item.img_name" >
+                                <img v-bind:src="item.img_name" >
                                 <div class="caption">
-                                    <h4 class="pull-right">$24.99</h4>
+                                    <h4 class="pull-right"></h4>
                                     <h4><a href="#">${item.name}</a>
                                     </h4>
-                                    <p>See more snippets like this online store item at <a target="_blank" v-bind:href="item.website">${item.website}</a>.</p>
+                                    <p>${item.intr}<a target="_blank" v-bind:href="item.website">${item.website}</a>.</p>
                                 </div>
                                 <div class="ratings">
                                     <p class="pull-right">15 reviews</p>
@@ -157,7 +156,7 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/vue.min.js"></script>
-            <script src="/js/vue-resource.min.js"></script>
+        <script src="/js/vue-resource.min.js"></script>
         <script>
             Vue.http.options.emulateJSON = true;
             var app = new Vue({

@@ -8,12 +8,15 @@ from .data.Imeili100Result import  Imeili100Result,Imeili100ResultStatus
 from django.http import JsonResponse
 import bson.json_util
 import json
+import imeili100.settings
 import jsonpickle
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def index(request):
     return render(request,'index.html')
+
+
 @csrf_exempt
 def queryBrands(request):
     page = 0
@@ -26,7 +29,11 @@ def queryBrands(request):
         categoryIndex = request.POST.get('category',0)
     collection = imongodata.db['t_brands']
     bransList =  list(collection.find({'category':int(categoryIndex)}))
-    print(type(categoryIndex))
+    for li in  bransList:
+        if 'img_name' in li:
+            li['img_name'] = imeili100.settings.STATIC_SERVER + li['img_name']
+        else:
+            print(li)
     jsonlist = bson.json_util.dumps(bransList)
     imeilires = Imeili100Result()
     imeilires.status = Imeili100ResultStatus.ok.value
@@ -42,6 +49,11 @@ def queryBrandCategory(request):
         page = request.POST.get('page',0)
     collection = imongodata.db['t_brands_category']
     categories = list(collection.find())
+    # for li in  categories:
+    #     if 'img_name' in li:
+    #         li['img_name'] = imeili100.settings.STATIC_SERVER + li['img_name']
+    #     else:
+    #         print(li)
     categoriesJsonStr =  jsonlist = bson.json_util.dumps(categories)
     imeilires = Imeili100Result()
     imeilires.status = Imeili100ResultStatus.ok.value

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -53,11 +54,10 @@ ROOT_URLCONF = 'imeili100.urls'
 #     os.path.join(os.path.abspath(__file__ + "/../../"), 'imeili100app', 'html').replace('\\', '/'),
 # )
 # STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(os.path.abspath(__file__+"/../../"), 'imeili100app','html').replace('\\','/')],
+        'DIRS': [os.path.join(os.path.abspath(__file__+"/../../"), 'imeili100app','template').replace('\\','/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,3 +122,5 @@ USE_TZ = True
 
 
 CSRF_COOKIE_SECURE = True
+STATIC_URL = '/imeili100/'
+STATIC_SERVER = 'http://localhost:8891/'
